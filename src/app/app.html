@@ -6,7 +6,6 @@
       <button (click)="nextWeek()" [disabled]="currentWeekIndex === weeks.length - 1">&#62;</button>
     </div>
   </div>
-
   <div class="calendar">
     @for (day of weeks[currentWeekIndex]; track day) {
       <div class="day-column">
@@ -14,6 +13,9 @@
           <div class="day-name">{{ day.date | date:'EEE' }}</div>
           <div class="day-date">{{ day.date | date:'d' }}</div>
         </div>
+        <button class="add-button" (click)="openAddEventModal(day.date)">
+          <p>+</p>
+        </button>
         <div 
           class="events" 
           cdkDropList
@@ -32,5 +34,12 @@
     }
   </div>
 </main>
+
+<app-add-event-modal 
+  [isModalOpen]="isModalOpen" 
+  [selectedDay]="currentDay"
+  (eventAdded)="handleEventAdded($event)"
+  (close)="closeAddEventModal()" 
+/>
 
 <router-outlet/>

@@ -1,0 +1,24 @@
+<div class="modal" [class.show]="isModalOpen">
+  <div class="modal-content">
+    <span class="close" (click)="isModalOpen = false">&times;</span>
+    <h2>Add Event</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <label for="eventTitle">Name: </label>
+            <input id="eventTitle" type="text" formControlName="eventTitle" />
+          </div>
+
+          @if (form.get('eventTitle')?.touched && form.get('eventTitle')?.invalid) {
+            @if (form.get('eventTitle')?.errors?.['required']) {
+              <small class="error-text">Event Title is required.</small>
+            }
+          }
+        </div>
+        <div class="footer">
+          <button class="cancel-button" (click)="onClose()">Cancel</button>
+          <button class="save-button">Save</button>
+        </div>
+    </form>
+  </div>
+</div>

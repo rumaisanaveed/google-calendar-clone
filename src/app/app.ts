@@ -2,10 +2,11 @@ import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem }
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AddEventModal } from './add-event-modal/add-event-modal';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, DatePipe, CdkDrag, CdkDropList],
+  imports: [RouterOutlet, DatePipe, CdkDrag, CdkDropList, AddEventModal],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -18,6 +19,27 @@ export class App {
 
   // it matches with the id of the event and helps in dragging
   allDropLists: string[] = [];
+  isModalOpen = false;
+  currentDay! : Date;
+
+  openAddEventModal(day : Date) {
+    this.isModalOpen = true;
+    this.currentDay = day;
+  }
+
+  closeAddEventModal() {
+    this.isModalOpen = false;
+  }
+
+  handleEventAdded(event: { day: Date; title: string }) {
+    for (let week of this.weeks) {
+      const dayObj = week.find(d => d.date.getTime() === event.day.getTime());
+      if (dayObj) {
+        dayObj.events.push({ id: 'e' + Date.now(), title: event.title });
+        break;
+      }
+    }
+  }
 
   weeks = [
     [

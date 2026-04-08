@@ -64,6 +64,7 @@ html, body {
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 4;
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
@@ -141,3 +142,23 @@ html, body {
 .events::-webkit-scrollbar-thumb:hover {
   background: #aaa;
 }
+
+.add-button {
+  background-color: #c6dafc;
+  font-size: 30px;
+  padding: 10px;
+  border: none;
+  border-radius: 100px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.add-button p {
+  color: white;
+}
+
+
